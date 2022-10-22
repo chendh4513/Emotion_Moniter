@@ -1,11 +1,24 @@
 from django.shortcuts import render,redirect,HttpResponse
 from app01 import models
 from app01.utils.form import LoginForm
+from app01.utils.code import check_code
+from io import BytesIO
 
 def login(request):
 
     return render(request, 'choose_character.html')
 
+
+def image_code(request):
+    #生成文件验证码
+    img, code_string = check_code()
+
+    request.session['image_code'] = code_string
+    request.session.set_expiry(60)
+
+    stream = BytesIO()
+    img.save(stream, 'png')
+    return HttpResponse(stream.getvalue())
 def login_student(request):
     title = "学生登录"
     if request.method == "GET":
@@ -35,7 +48,7 @@ def login_student(request):
 
 def login_teacher(request):
 
-    title = "老师登录"
+    title = "教师登录"
     if request.method == "GET":
         form = LoginForm()
         return render(request, 'login.html', {"title": title, "form": form})

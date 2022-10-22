@@ -1,6 +1,4 @@
 from django import forms
-from app01 import models
-from django.core.validators import ValidationError
 from app01.utils import encrypt , bootstrap
 
 class LoginForm(bootstrap.BootStrapForm):

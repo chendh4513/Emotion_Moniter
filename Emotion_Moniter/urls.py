@@ -18,9 +18,12 @@ from django.urls import path
 from app01.views import account
 
 urlpatterns = [
+
+    #登录界面
     path('login/', account.login),
     path('login/student/', account.login_student),
     path('login/teacher/', account.login_teacher),
     path('login/admin/', account.login_admin),
+    path('image/code/', account.image_code),
 
 ]
