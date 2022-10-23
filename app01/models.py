@@ -6,6 +6,8 @@ class Student(models.Model):
 
     stu_no = models.IntegerField(verbose_name="学号", unique=True)
     name = models.CharField(verbose_name="姓名", max_length=32)
+    account_no = models.CharField(verbose_name="账号", unique=True, max_length=32)
+    password = models.CharField(verbose_name="密码", max_length=64)
     age = models.IntegerField(verbose_name="年龄")
     gender_choices = (
         (1, "男"),
@@ -22,6 +24,8 @@ class Student(models.Model):
 class Teacher(models.Model):
 
     name = models.CharField(verbose_name="姓名", max_length=32)
+    account_no = models.CharField(verbose_name="账号", unique=True, max_length=32)
+    password = models.CharField(verbose_name="密码", max_length=64)
     age = models.IntegerField(verbose_name="年龄")
     gender_choices = (
         (1, "男"),
@@ -35,6 +39,8 @@ class Teacher(models.Model):
 class Admin(models.Model):
 
     name = models.CharField(verbose_name="姓名", max_length=32)
+    account_no = models.CharField(verbose_name="账号", unique=True, max_length=32)
+    password = models.CharField(verbose_name="密码", max_length=64)
     age = models.IntegerField(verbose_name="年龄")
     gender_choices = (
         (1, "男"),

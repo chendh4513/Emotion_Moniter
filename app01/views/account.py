@@ -8,7 +8,6 @@ def login(request):
 
     return render(request, 'choose_character.html')
 
-
 def image_code(request):
     #生成文件验证码
     img, code_string = check_code()
@@ -19,6 +18,34 @@ def image_code(request):
     stream = BytesIO()
     img.save(stream, 'png')
     return HttpResponse(stream.getvalue())
+
+def login_admin(request):
+    title = "管理员登录"
+    if request.method == "GET":
+        form = LoginForm()
+        return render(request, 'login.html', {"title": title, "form": form})
+
+    form = LoginForm(data=request.POST)
+    if form.is_valid():
+
+        user_input_code = form.cleaned_data.pop("image_code")
+        image_code = request.session.get("image_code", "")
+        if image_code != user_input_code.upper():
+            form.add_error("image_code", "验证码错误")
+            return render(request, 'login.html', {"title": title, "form": form})
+
+        admin_object = models.Admin.objects.filter(**form.cleaned_data).first()
+
+        if not admin_object:
+            form.add_error("password", "用户名或密码错误")
+            return render(request, 'login.html', {"title": title, "form": form})
+
+        request.session["info"] = {"id": admin_object.id, "username": admin_object.account_no, "actor": "admin"}
+        request.session.set_expiry(60 * 60 * 27)
+        return redirect('/list/admin/')
+
+    return render(request, 'login.html', {"title": title, "form": form})
+
 def login_student(request):
     title = "学生登录"
     if request.method == "GET":
@@ -40,9 +67,9 @@ def login_student(request):
             form.add_error("password", "用户名或密码错误")
             return render(request, 'login.html', {"title": title, "form": form})
 
-        request.session["info"] = {"id": sutdent_object.id, "username": sutdent_object.username}
+        request.session["info"] = {"id": sutdent_object.id, "username": sutdent_object.account_no, "actor": "student"}
         request.session.set_expiry(60 * 60 * 27)
-        return HttpResponse("登录成功")
+        return HttpResponse("登陆成功")
 
     return render(request, 'login.html', {"title": title, "form": form})
 
@@ -68,35 +95,9 @@ def login_teacher(request):
             form.add_error("password", "用户名或密码错误")
             return render(request, 'login.html', {"title": title, "form": form})
 
-        request.session["info"] = {"id": teacher_object.id, "username": teacher_object.username}
+        request.session["info"] = {"id": teacher_object.id, "username": teacher_object.account_no, "actor": "teacher"}
         request.session.set_expiry(60 * 60 * 27)
-        return HttpResponse("登录成功")
+        return HttpResponse("登陆成功")
 
     return render(request, 'login.html', {"title": title, "form": form})
 
-def login_admin(request):
-    title = "管理员登录"
-    if request.method == "GET":
-        form = LoginForm()
-        return render(request, 'login.html', {"title": title, "form": form})
-
-    form = LoginForm(data=request.POST)
-    if form.is_valid():
-
-        user_input_code = form.cleaned_data.pop("image_code")
-        image_code = request.session.get("image_code", "")
-        if image_code != user_input_code.upper():
-            form.add_error("image_code", "验证码错误")
-            return render(request, 'login.html', {"title": title, "form": form})
-
-        admin_object = models.Admin.objects.filter(**form.cleaned_data).first()
-
-        if not admin_object:
-            form.add_error("password", "用户名或密码错误")
-            return render(request, 'login.html', {"title": title, "form": form})
-
-        request.session["info"] = {"id": admin_object.id, "username": admin_object.username}
-        request.session.set_expiry(60 * 60 * 27)
-        return HttpResponse("登录成功")
-
-    return render(request, 'login.html', {"title": title, "form": form})

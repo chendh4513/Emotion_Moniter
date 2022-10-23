@@ -15,15 +15,33 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app01.views import account
+from app01.views import account, admin
 
 urlpatterns = [
 
-    #登录界面
+    # 登录界面
     path('login/', account.login),
     path('login/student/', account.login_student),
     path('login/teacher/', account.login_teacher),
     path('login/admin/', account.login_admin),
     path('image/code/', account.image_code),
+
+    # 管理员界面
+    path('admin/home', admin.admin_home),
+    path('list/admin/', admin.list_admin),
+    path('add/admin/', admin.add_admin),
+    path('edit/<int:nid>/admin/', admin.edit_admin),
+    path('delete/<int:nid>/admin/', admin.delete_admin),
+    path('reset/<int:nid>/admin/', admin.reset_admin),
+    path('list/student/', admin.list_student),
+    path('add/student/', admin.add_student),
+    path('edit/<int:nid>/student/', admin.edit_student),
+    path('delete/<int:nid>/student/', admin.delete_student),
+    path('reset/<int:nid>/student/', admin.reset_student),
+    path('list/teacher/', admin.list_teacher),
+    path('add/teacher/', admin.add_teacher),
+    path('edit/<int:nid>/teacher/', admin.edit_teacher),
+    path('delete/<int:nid>/teacher/', admin.delete_teacher),
+    path('reset/<int:nid>/teacher/', admin.reset_teacher),
 
 ]

@@ -31,8 +31,8 @@
         {% csrf_token %}
         <div class="form-group">
             <label>用户名</label>
-            {{ form.username }}
-            <span style="color: red;">{{ form.username.errors.0 }}</span>
+            {{ form.account_no }}
+            <span style="color: red;">{{ form.account_no.errors.0 }}</span>
         </div>
         <div class="form-group">
             <label>密码</label>
