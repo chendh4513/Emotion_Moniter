@@ -1,12 +1,12 @@
-{% extends 'admin_layout.html' %}
+{% extends 'admin_home/admin_layout.html' %}
 
 {% block content %}
 
     <div class="container">
         <div style="margin-bottom: 10px">
-            <a class="btn btn-success" href="/add/admin/">
+            <a class="btn btn-success" href="/add/student/">
                 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                添加管理员
+                添加学生
             </a>
         </div>
 
@@ -14,7 +14,7 @@
 
             <div class="panel-heading">
                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                管理员列表
+                学生列表
             </div>
 
             <table class="table table-bordered">
@@ -36,11 +36,11 @@
                         <td>{{ obj.account_no }}</td>
                         <td>*************</td>
                         <td>
-                            <a class="btn btn-primary btn-xs" href="/reset/{{ obj.id }}/admin/">重置密码</a>
+                            <a class="btn btn-primary btn-xs" href="/reset/{{ obj.id }}/student/">重置密码</a>
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-xs" href="/edit/{{ obj.id }}/admin/">编辑</a>
-                            <a class="btn btn-danger btn-xs" href="/delete/{{ obj.id }}/admin/">删除</a>
+                            <a class="btn btn-primary btn-xs" href="/edit/{{ obj.id }}/student/">编辑</a>
+                            <a class="btn btn-danger btn-xs" href="/delete/{{ obj.id }}/student/">删除</a>
                         </td>
                     </tr>
                 {% endfor %}

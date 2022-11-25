@@ -4,7 +4,7 @@ from django.core.validators import RegexValidator
 # Create your models here.
 class Student(models.Model):
 
-    stu_no = models.IntegerField(verbose_name="学号", unique=True)
+    stu_no = models.CharField(verbose_name="学号", max_length=32, unique=True)
     name = models.CharField(verbose_name="姓名", max_length=32)
     account_no = models.CharField(verbose_name="账号", unique=True, max_length=32)
     password = models.CharField(verbose_name="密码", max_length=64)

@@ -6,7 +6,7 @@ from app01.utils.pagination import PagInation
 
 def admin_home(request):
 
-    return render(request, "admin_layout.html")
+    return render(request, "admin_home/admin_layout.html")
 
 
 def list_admin(request):
@@ -27,21 +27,21 @@ def list_admin(request):
         "search_data" : search_data
     }
 
-    return render(request, 'admin_list.html', context)
+    return render(request, 'admin_home/admin_list.html', context)
 
 def add_admin(request):
 
     title = "新建管理员"
     if request.method == "GET":
         form = AdminAdd()
-        return render(request, "change.html", {"form": form, "title": title})
+        return render(request, "admin_home/change.html", {"form": form, "title": title})
 
     form = AdminAdd(data=request.POST)
     if form.is_valid():
         form.save()
         return redirect('/list/admin/')
 
-    return render(request, "change.html", {"form": form, "title": title})
+    return render(request, "admin_home/change.html", {"form": form, "title": title})
 
 def edit_admin(request, nid):
 
@@ -52,14 +52,14 @@ def edit_admin(request, nid):
     title = "修改管理员信息"
     if request.method == "GET":
         form = AdminEdit(instance=row_object)
-        return render(request, "change.html", {"form": form, "title": title})
+        return render(request, "admin_home/change.html", {"form": form, "title": title})
 
     form = AdminEdit(data=request.POST,  instance=row_object)
     if form.is_valid():
         form.save()
         return redirect('/list/admin/')
 
-    return render(request, "change.html", {"form": form, "title": title})
+    return render(request, "admin_home/change.html", {"form": form, "title": title})
 
 def delete_admin(request, nid):
 
@@ -81,14 +81,14 @@ def reset_admin(request, nid):
 
     if request.method == "GET":
         form = AdminReset()
-        return render(request, "change.html", {"form": form, "title": title})
+        return render(request, "admin_home/change.html", {"form": form, "title": title})
 
     form = AdminReset(data=request.POST, instance=row_object)
     if form.is_valid():
         form.save()
         return redirect("/list/admin/")
 
-    return render(request, "change.html", {"form": form, "title": title})
+    return render(request, "admin_home/change.html", {"form": form, "title": title})
 
 def list_student(request):
 
@@ -108,21 +108,21 @@ def list_student(request):
         "search_data" : search_data
     }
 
-    return render(request, 'student_list.html', context)
+    return render(request, 'admin_home/student_list.html', context)
 
 def add_student(request):
 
     title = "新建学生"
     if request.method == "GET":
         form = StudentAdd()
-        return render(request, "change.html", {"form": form, "title": title})
+        return render(request, "admin_home/change.html", {"form": form, "title": title})
 
     form = StudentAdd(data=request.POST)
     if form.is_valid():
         form.save()
         return redirect('/list/student/')
 
-    return render(request, "change.html", {"form": form, "title": title})
+    return render(request, "admin_home/change.html", {"form": form, "title": title})
 
 def edit_student(request, nid):
 
@@ -133,14 +133,14 @@ def edit_student(request, nid):
     title = "修改学生信息"
     if request.method == "GET":
         form = StudentEdit(instance=row_object)
-        return render(request, "change.html", {"form": form, "title": title})
+        return render(request, "admin_home/change.html", {"form": form, "title": title})
 
     form = StudentAdd(data=request.POST, instance=row_object)
     if form.is_valid():
         form.save()
         return redirect('/list/student/')
 
-    return render(request, "change.html", {"form": form, "title": title})
+    return render(request, "admin_home/change.html", {"form": form, "title": title})
 
 def delete_student(request, nid):
 
@@ -162,14 +162,14 @@ def reset_student(request, nid):
 
     if request.method == "GET":
         form = StudentReset()
-        return render(request, "change.html", {"form": form, "title": title})
+        return render(request, "admin_home/change.html", {"form": form, "title": title})
 
     form = StudentReset(data=request.POST, instance=row_object)
     if form.is_valid():
         form.save()
         return redirect("/list/student/")
 
-    return render(request, "change.html", {"form": form, "title": title})
+    return render(request, "admin_home/change.html", {"form": form, "title": title})
 
 def list_teacher(request):
 
@@ -189,21 +189,21 @@ def list_teacher(request):
         "search_data" : search_data
     }
 
-    return render(request, 'teacher_list.html', context)
+    return render(request, 'admin_home/teacher_list.html', context)
 
 def add_teacher(request):
 
     title = "新建教师"
     if request.method == "GET":
         form = TeacherAdd()
-        return render(request, "change.html", {"form": form, "title": title})
+        return render(request, "admin_home/change.html", {"form": form, "title": title})
 
     form = TeacherAdd(data=request.POST)
     if form.is_valid():
         form.save()
         return redirect('/list/teacher/')
 
-    return render(request, "change.html", {"form": form, "title": title})
+    return render(request, "admin_home/change.html", {"form": form, "title": title})
 
 def edit_teacher(request, nid):
 
@@ -214,14 +214,14 @@ def edit_teacher(request, nid):
     title = "修改教师信息"
     if request.method == "GET":
         form = TeacherEdit(instance=row_object)
-        return render(request, "change.html", {"form": form, "title": title})
+        return render(request, "admin_home/change.html", {"form": form, "title": title})
 
     form = TeacherEdit(data=request.POST, instance=row_object)
     if form.is_valid():
         form.save()
         return redirect('/list/teacher/')
 
-    return render(request, "change.html", {"form": form, "title": title})
+    return render(request, "admin_home/change.html", {"form": form, "title": title})
 
 def delete_teacher(request, nid):
 
@@ -243,11 +243,11 @@ def reset_teacher(request, nid):
 
     if request.method == "GET":
         form = TeacherReset()
-        return render(request, "change.html", {"form": form, "title": title})
+        return render(request, "admin_home/change.html", {"form": form, "title": title})
 
     form = TeacherReset(data=request.POST, instance=row_object)
     if form.is_valid():
         form.save()
         return redirect("/list/teacher/")
 
-    return render(request, "change.html", {"form": form, "title": title})
+    return render(request, "admin_home/change.html", {"form": form, "title": title})

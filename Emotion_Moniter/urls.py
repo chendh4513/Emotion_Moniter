@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app01.views import account, admin
+from app01.views import account, admin, chat
 
 urlpatterns = [
 
@@ -43,5 +43,9 @@ urlpatterns = [
     path('edit/<int:nid>/teacher/', admin.edit_teacher),
     path('delete/<int:nid>/teacher/', admin.delete_teacher),
     path('reset/<int:nid>/teacher/', admin.reset_teacher),
+
+    #聊天室
+    path('chat/index/', chat.chat_index),
+    path('chat/<str:room_name>/room/', chat.chat_room),
 
 ]

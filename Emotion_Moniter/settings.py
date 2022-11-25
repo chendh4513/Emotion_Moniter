@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app01.apps.App01Config',
+    'app01',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -78,7 +79,7 @@ WSGI_APPLICATION = 'Emotion_Moniter.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'EM',
+        'NAME' : 'em',
         'USER' : 'root',
         'PASSWORD' : 'chendonghao1105',
         'HOST' : 'localhost',
@@ -128,3 +129,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ASGI_APPLICATION = 'Emotion_Moniter.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default" : {
+        "BACKEND" : "channels.layers.InMemoryChannelLayer"
+    }
+}
